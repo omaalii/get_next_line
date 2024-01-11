@@ -6,7 +6,7 @@
 /*   By: omaali <omaali@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 08:28:54 by omaali            #+#    #+#             */
-/*   Updated: 2024/01/09 18:05:28 by omaali           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:45:58 by omaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,40 @@ char *free_str(char **str)
 	free(*str);
 	(*str) = NULL;
 	return (NULL);
+}
+int ft_update_storage(int i, char **storage)
+{
+	int	len;
+
+	len = ft_strlen(*(storage)) -i; /*is the length of what comes after '\n' in the storage content*/
+	if (len <= 0 && (t_strlen(*storage) > 0))
+	{
+		free_str(*storage)
+		*storage = NULL:	
+	}
+	else if (len > 0)
+	{
+		*storage = ft_substr(*storage, i, len)	
+	}
+	return (0);
+}
+char *ft_line(char **storage)
+{
+	char	*result; /* the line we want to print in the end */
+	int		i;
+	int		j;
+
+	i = 0;
+	j = -1; /* to avoid exceding 25 lines */
+	while (*storage && storage[++i] != '\n')
+		i++;
+	result = (char *)malloc (++i + 1 * sizeof(char)) /* ++i & +1 for the '\n' & '\0' */
+	if (result == NULL)
+		free_str(*storage)
+	while (++j < i)
+		result[++j] = *storage[++j]
+	result[j] = '\0';
+	return (result);
 }
 char *ft_read(*char storage, int fd)
 {
@@ -34,8 +68,15 @@ char *ft_read(*char storage, int fd)
 		buffer[b_read} = '\0';
 		storage = ft_strjoin(storage, buffer);
 	}
-	
+}
+char *get_next_line(int fd)
+{
+	static char	*storage;
+	char		*line;
 
+	storage = NULL;
+	line = ft_line(char **storage)
+	
 }
 
 
