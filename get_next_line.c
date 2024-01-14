@@ -6,7 +6,7 @@
 /*   By: omaali <omaali@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 08:28:54 by omaali            #+#    #+#             */
-/*   Updated: 2024/01/11 18:45:58 by omaali           ###   ########.fr       */
+/*   Updated: 2024/01/14 14:55:17 by omaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int ft_update_storage(int i, char **storage)
 }
 char *ft_line(char **storage)
 {
-	char	*result; /* the line we want to print in the end */
+	char	*result; /* the licne we want to print in the end */
 	int		i;
 	int		j;
 
 	i = 0;
 	j = -1; /* to avoid exceding 25 lines */
-	while (*storage && storage[++i] != '\n')
+	while (*storage && storage[++i] != '\n')/* to get the length of "line" through i */ 
 		i++;
 	result = (char *)malloc (++i + 1 * sizeof(char)) /* ++i & +1 for the '\n' & '\0' */
 	if (result == NULL)
@@ -65,7 +65,7 @@ char *ft_read(*char storage, int fd)
 		b_read = read(fd, *buffer, BUFFER_SIZE)
 		if (b_read == -1)
 			free_str(&storage);
-		buffer[b_read} = '\0';
+		buffer[b_read] = '\0';
 		storage = ft_strjoin(storage, buffer);
 	}
 }
@@ -75,8 +75,8 @@ char *get_next_line(int fd)
 	char		*line;
 
 	storage = NULL;
-	line = ft_line(char **storage)
-	
+	line = NULL;
+	if ()
 }
 
 
