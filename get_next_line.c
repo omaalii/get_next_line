@@ -6,7 +6,7 @@
 /*   By: omaali <omaali@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 08:28:54 by omaali            #+#    #+#             */
-/*   Updated: 2024/01/14 14:55:17 by omaali           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:49:26 by omaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int ft_update_storage(int i, char **storage)
 	int	len;
 
 	len = ft_strlen(*(storage)) -i; /*is the length of what comes after '\n' in the storage content*/
-	if (len <= 0 && (t_strlen(*storage) > 0))
+	if (len <= 0 && (ft_strlen(*storage) > 0))
 	{
 		free_str(*storage)
 		*storage = NULL:	
@@ -36,14 +36,20 @@ int ft_update_storage(int i, char **storage)
 }
 char *ft_line(char **storage)
 {
-	char	*result; /* the licne we want to print in the end */
+	char	*result; /* the line we want to print in the end */
 	int		i;
 	int		j;
 
 	i = 0;
 	j = -1; /* to avoid exceding 25 lines */
+	while (*storage & !ft_strchr(storage, '\n')/* if there's no newline in storage that means it is thend of the file so just copy whatever's in storage to result */
+	{
+		result = ft_strdup(storage);
+		return (result);
+	}
 	while (*storage && storage[++i] != '\n')/* to get the length of "line" through i */ 
 		i++;
+	
 	result = (char *)malloc (++i + 1 * sizeof(char)) /* ++i & +1 for the '\n' & '\0' */
 	if (result == NULL)
 		free_str(*storage)
@@ -74,9 +80,17 @@ char *get_next_line(int fd)
 	static char	*storage;
 	char		*line;
 
-	storage = NULL;
 	line = NULL;
-	if ()
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return NULL;
+	storage = ft_read(storage, fd)
+	if (!storage)
+		return NULL;
+	line = ft_line(storage)
+	if (!line)
+		free_str(*storage)
+		return NULL;
+	return (line);
 }
 
 
