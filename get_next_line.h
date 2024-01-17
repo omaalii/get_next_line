@@ -25,13 +25,13 @@
 
 char		*get_next_line(int fd);
 char		*ft_read(char *storage, int fd);
-char		*ft_line(char **storage);
-int			ft_update_storage(int i, char **storage);
+char		*ft_line(char *storage);
+char		*ft_update_storage(char *storage);
 char		*free_str(char **str);
 char		*ft_substr(char *str, unsigned int start, size_t len);
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s1);
 char		*ft_strchr(const char *s, int c);
-char		*ft_strjoin(const char *s1, const char *s2);
+char		*ft_strjoin(char *s1, char *s2);
 
 #endif
