@@ -6,74 +6,77 @@
 /*   By: omaali <omaali@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 08:28:54 by omaali            #+#    #+#             */
-/*   Updated: 2024/01/16 14:49:26 by omaali           ###   ########.fr       */
+/*   Updated: 2024/01/17 20:47:22 by omaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *free_str(char **str)
+char	*free_str(char **str)
 {
 	free(*str);
 	(*str) = NULL;
 	return (NULL);
 }
-int ft_update_storage(int i, char **storage)
+
+int	ft_update_storage(int i, char **storage)
 {
 	int	len;
 
-	len = ft_strlen(*(storage)) -i; /*is the length of what comes after '\n' in the storage content*/
+	len = ft_strlen(*(storage)) - i;/*is the length of what comes after '\n'*/
 	if (len <= 0 && (ft_strlen(*storage) > 0))
 	{
-		free_str(*storage)
-		*storage = NULL:	
+		free_str(storage);
+		*(storage) = NULL;
 	}
 	else if (len > 0)
 	{
-		*storage = ft_substr(*storage, i, len)	
+		*storage = ft_substr(*storage, i, len);	
 	}
 	return (0);
 }
 char *ft_line(char **storage)
 {
-	char	*result; /* the line we want to print in the end */
+	char	*result;/* the line we want to print in the end */
 	int		i;
 	int		j;
 
 	i = 0;
 	j = -1; /* to avoid exceding 25 lines */
-	while (*storage & !ft_strchr(storage, '\n')/* if there's no newline in storage that means it is thend of the file so just copy whatever's in storage to result */
+	while (*storage && !ft_strchr(*storage, '\n'))/* if there's no newline in storage that means it is thend of the file so just copy whatever's in storage to result */
 	{
-		result = ft_strdup(storage);
+		result = ft_strdup(*storage);
 		return (result);
 	}
-	while (*storage && storage[++i] != '\n')/* to get the length of "line" through i */ 
+	while (*storage && *storage[++i] != '\n')/* to get the length of "line" through i */ 
 		i++;
 	
-	result = (char *)malloc (++i + 1 * sizeof(char)) /* ++i & +1 for the '\n' & '\0' */
+	result = (char *)malloc (++i + 1 * sizeof(char));/* ++i & +1 for the '\n' & '\0' */
 	if (result == NULL)
-		free_str(*storage)
+		free_str(storage);
 	while (++j < i)
-		result[++j] = *storage[++j]
+		result[j] = *storage[j];
 	result[j] = '\0';
 	return (result);
 }
-char *ft_read(*char storage, int fd)
+char *ft_read(char *storage, int fd)
 {
 	char	*buffer;
-	char	b_read;
+	int		b_read;
 	
 	buffer = NULL;
-	b_read = 1;
-	buffer = (char *)malloc (sizeof (char) * (BUFFER_SIZE + 1))
-	while (!storage || ! (storage && !ft_strchr(*storage, '\n') && b_read > 0))
+	b_read = 0;
+	buffer = (char *)malloc (sizeof (char) * (BUFFER_SIZE + 1));
+	while (!storage || (storage && !ft_strchr(storage, '\n') && b_read > -1))
 	{
-		b_read = read(fd, *buffer, BUFFER_SIZE)
+		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read == -1)
 			free_str(&storage);
 		buffer[b_read] = '\0';
 		storage = ft_strjoin(storage, buffer);
 	}
+	printf("%s\n", storage);
+	return(0);
 }
 char *get_next_line(int fd)
 {
@@ -83,15 +86,15 @@ char *get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return NULL;
-	storage = ft_read(storage, fd)
+	printf("horse");
+	storage = ft_read(storage, fd);
 	if (!storage)
-		return NULL;
-	line = ft_line(storage)
+		return (storage = NULL);
+	line = ft_line(&storage);
 	if (!line)
-		free_str(*storage)
+	{
+		free_str(&storage);
 		return NULL;
+	}
 	return (line);
 }
-
-
-
