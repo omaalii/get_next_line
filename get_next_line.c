@@ -6,7 +6,7 @@
 /*   By: omaali <omaali@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 08:28:54 by omaali            #+#    #+#             */
-/*   Updated: 2024/01/17 22:59:23 by omaali           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:13:24 by omaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ char	*free_str(char **str)
 	return (NULL);
 }
 
-char *ft_update_storage(char *storage)
+char	*ft_update_storage(char *storage)
 {
-	int	len;
-	int i;
-	char *new_storage;
+	int		len;
+	int		i;
+	char	*new_storage;
 
-	if(!storage)
+	if (!storage)
 		return (NULL);
 	i = 0;
 	while (storage[i] != '\0' && storage[i] != '\n')
 		i++;
-	if(storage[i] == '\0')
+	if (storage[i] == '\0')
 	{
 		free(storage);
-		return(NULL);
+		return (NULL);
 	}
 	i++;
-	len = ft_strlen(storage) - i;/*is the length of what comes after '\n'*/
+	len = ft_strlen(storage) - i;//length of what comes after '\n'
 	new_storage = ft_substr(storage, i, len);	
 	free(storage);
 	return (new_storage);
